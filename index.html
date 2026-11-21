@@ -45,12 +45,48 @@ th { font-size:11px; text-transform:uppercase; color:#5a6474; letter-spacing:.05
   .pg { background:#fff; border-radius:16px; padding:20px; margin:0 0 18px; box-shadow:0 1px 3px rgba(0,0,0,.08); }
   .foot { font-size:12px; }
 }
+/* dark theme (screen only; print and PDF stay light) — warm grays, not black */
+@media screen {
+  html.dark { background:#262624; color-scheme:dark; }
+  html.dark body { color:#e8e6e1; }
+  html.dark .pg { background:#30302e; box-shadow:none; border:1px solid #3e3e3b; }
+  html.dark h1, html.dark h2 { color:#f08a76; } html.dark .hero h1 { color:#fff; }
+  html.dark .sub, html.dark th, html.dark .gs { color:#a9a7a0; }
+  html.dark .st { background:#3a302d; border-color:#5b403a; } html.dark .st b { color:#f4a596; }
+  html.dark .box { background:#363633; border-color:#4a4945; }
+  html.dark .box.y { background:#3a3425; border-color:#5f5331; }
+  html.dark .box.g { background:#2b382e; border-color:#43604b; }
+  html.dark .box.r { background:#3e2b2b; border-color:#654343; }
+  html.dark .g { background:#353532; border-color:#4a4945; }
+  html.dark .slot, html.dark .gt span { color:#e3b45c; } html.dark .gt { color:#d3d1cb; }
+  html.dark .why { color:#82d39e; }
+  html.dark td, html.dark th { border-bottom-color:#46453f; }
+  html.dark .pill { background:#42413d; color:#e8e6e1; } html.dark .pill.x { background:#4b2e2e; color:#f2a5a5; }
+  html.dark .foot { color:#8f8d86; }
+  .theme { position:fixed; top:12px; right:12px; z-index:5; border:1px solid #c9ced8; background:#fff; color:#1d2433; border-radius:20px;
+           padding:6px 12px; font:600 12px "Segoe UI", Arial, sans-serif; cursor:pointer; }
+  html.dark .theme { background:#3a3a37; color:#e8e6e1; border-color:#55544f; }
+}
+@media print { .theme { display:none; } }
 @media screen and (max-width:640px) {
   .steps, .two, .grid { display:block; } .st, .two > .box, .g { margin-bottom:8px; }
   h1 { font-size:26px; } .hero { padding:16px; } .hero img { width:52px; height:52px; }
   table { display:block; overflow-x:auto; } .bar { max-width:90px; }
 }
-</style></head><body>
+</style>
+<script>
+(function () {
+  var t = null; try { t = localStorage.getItem("theme"); } catch (e) {}
+  if (t === "dark") document.documentElement.classList.add("dark");
+})();
+function toggleTheme() {
+  var d = document.documentElement.classList.toggle("dark");
+  try { localStorage.setItem("theme", d ? "dark" : "light"); } catch (e) {}
+  document.getElementById("themebtn").textContent = d ? "Light mode" : "Dark mode";
+}
+</script></head><body>
+<button class="theme" id="themebtn" onclick="toggleTheme()">Light mode</button>
+<script>if (!document.documentElement.classList.contains("dark")) document.getElementById("themebtn").textContent = "Dark mode";</script>
 
 <section class="pg">
   <div class="hero"><img class="ic" src="data:image/webp;base64,UklGRkwBAABXRUJQVlA4TD8BAAAvF8AFEJegtLaWjMMATPAfSex/DkvYtdtMVl1DTSRJ0dU5uPCPcIABLBBjALsI+XOqFEeSlJzg8uOepEAk5B+Lw/wHAPz1q1/dKTAfAdaJIDHbyWAWHAUVVqN5fQDq1nvmfca8umlw2LaRI+lmJ1xO03+1O7eP7yCi/wrbtm3sJN3N+iIzgUw+/ITR1V3BpDMM1J2i86LYYxER9hi6zE7R1RG7r/e8bhN07YIv6+4NETMzEZrv6+Kgqu4NaK2Vn9xdlSxvAZgobK16NIExQIzEni7bdkydx7Yh3Q9ht/wcux8kLmtjNLui4PyNt+It+G7T7Ky4KoBpvKhXtnL4vRJ8P2KA+tGgnoO61XoO68+4/qj6736p6j/99XlZtfu5zve6TfB1mZ3sot1PRER3pEUzcVewkE4D9aLlcSYffsJIAA==" alt=""><div><h1>Kagerou Bleed Build</h1>
